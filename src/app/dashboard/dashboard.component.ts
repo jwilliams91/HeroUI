@@ -10,6 +10,7 @@ import { Hero } from '../hero';
 })
 export class DashboardComponent implements OnInit {
 
+  imgSrc: string;
   heroes: Hero[] = [];
   constructor(private heroService: HeroService) { }
 
@@ -18,4 +19,25 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  onMouseOver(id: Number): void {
+    if(id === 13){
+      this.imgSrc = "../assets/Thor.png";
+    }
+    else if(id === 12)
+    {
+      this.imgSrc = "../assets/IronMan.png";
+    }
+    else if(id === 14)
+    {
+      this.imgSrc = "../assets/Captain-America.png";
+    }
+    else if(id === 15)
+    {
+      this.imgSrc = "../assets/Hulk.png";
+    }
+  }
+
+  onMouseOut(): void {
+    this.imgSrc = null;
+  }
 }
