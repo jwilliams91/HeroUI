@@ -15,26 +15,20 @@ export class DashboardComponent implements OnInit {
   constructor(private heroService: HeroService) { }
 
   ngOnInit(): void {
-    this.heroService.getHeroes().then(heroes => this.heroes = heroes.slice(1,5));
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes.slice(0,4));
 
   }
 
   onMouseOver(id: Number): void {
-    if(id === 13){
-      this.imgSrc = "../assets/Thor.png";
-    }
-    else if(id === 12)
+
+    switch(id)
     {
-      this.imgSrc = "../assets/IronMan.png";
+      case 1: this.imgSrc = "../assets/Iron Man.png"; break;
+      case 2: this.imgSrc = "../assets/Thor.png"; break;
+      case 3: this.imgSrc = "../assets/Captain America.png"; break;
+      case 4: this.imgSrc = "../assets/Hulk.png"; break;
     }
-    else if(id === 14)
-    {
-      this.imgSrc = "../assets/Captain-America.png";
-    }
-    else if(id === 15)
-    {
-      this.imgSrc = "../assets/Hulk.png";
-    }
+    
   }
 
   onMouseOut(): void {
