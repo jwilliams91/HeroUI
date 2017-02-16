@@ -6,6 +6,7 @@
         <span class="badge">{{hero.id}}</span> {{hero.name}}
       </li>
     </ul>
+    <button routerLink="/heroform" routerLinkActive="active">Add Hero</button>
   </div>
   <div style="width: 66%; float: right;">
     <my-hero-detail [hero]="selectedHero"></my-hero-detail>

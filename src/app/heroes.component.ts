@@ -33,6 +33,10 @@ export class HeroesComponent implements OnInit{
   ngOnInit(): void{
     this.getHeroes();
   }
+
+  addHero(): void {
+    this.heroes.push(this.selectedHero);
+  }
 }
 
 
