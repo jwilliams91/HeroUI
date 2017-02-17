@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
@@ -14,7 +15,8 @@ export class HeroFormComponent implements OnInit {
 
   constructor(
     private heroService: HeroService,
-    private location: Location) { }
+    private location: Location,
+    private router: Router) { }
 
   submitted = false;
   newHero: Hero;
@@ -26,9 +28,12 @@ export class HeroFormComponent implements OnInit {
   onSubmit(): void{ 
     this.submitted = true; 
     this.heroService.addHero(this.newHero);
+    this.router.navigateByUrl("/heroes");
+
   }
 
   goBack(): void {
     this.location.back();
   }
+
 }

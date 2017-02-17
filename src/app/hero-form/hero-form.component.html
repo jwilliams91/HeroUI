@@ -13,7 +13,11 @@
         <label for="bio">Bio</label>
         <input type="text" class="form-control" id="bio" required [(ngModel)]="newHero.bio" name="bio">
       </div>
-      <button type="submit" routerLink="/heroes" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+      <div class="form-group">
+        <label for="heroImage">Upload Image</label>
+        <!--<image-upload class="form-control" id="heroImage" name="heroImage"></image-upload>-->
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
       <button type="button" (click)="goBack()" class="btn">Cancel</button>
     </form>
 </div>

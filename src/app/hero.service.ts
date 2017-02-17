@@ -18,5 +18,6 @@ export class HeroService
     addHero(newHero: Hero): void{
         this.getHeroes().then(heroes => newHero.id = (heroes.length + 1));
         this.getHeroes().then(heroes => heroes.push(newHero));
+        console.log("Hero Added");
     }
 }

@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HeroFormComponent } from './hero-form/hero-form.component';
+import { ImageUploadModule } from 'angular2-image-upload';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HeroFormComponent } from './hero-form/hero-form.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ImageUploadModule
   ],
   providers: [ HeroService ],
   bootstrap: [ AppComponent ]

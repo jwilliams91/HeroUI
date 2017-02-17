@@ -23,6 +23,8 @@ export class HeroDetailComponent implements OnInit{
   @Input()
   hero: Hero;
 
+  imgSrc: string;
+
   ngOnInit(): void{
     this.route.params.switchMap((params: Params) => this.heroService.getHero(+params['id']))
     .subscribe(hero => this.hero = hero);
@@ -32,6 +34,6 @@ export class HeroDetailComponent implements OnInit{
     this.location.back();
   }
 
-  
+    
 
 }
