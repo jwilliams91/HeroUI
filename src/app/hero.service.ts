@@ -1,27 +1,30 @@
 import {Injectable} from '@angular/core';
 
 import {Hero} from './hero';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 
 @Injectable()
 export class HeroService
 {
-    private heroesUrl = 'api/heroes'; //URL to web api
-    private headers = new Headers({'Content-Type': 'application/json'});
+    private heroesUrl = 'http://localhost:4567/hello'; //URL to web api
+    private headers = new Headers([{'Content-Type': 'application/json'}, {'Accept':'application/json'}]);
 
     constructor(private http: Http){}
 
     getHeroes(): Promise<Hero[]> {
         return this.http.get(this.heroesUrl).toPromise().then(
-            response => response.json().data as Hero[]).catch(this.handleError);
+            response => response.json() as Hero[]);
     } //stub
 
     getHero(id: number): Promise<Hero> {
         const url = `${this.heroesUrl}/${id}`;
         return this.http.get(url).toPromise().then(
-                response => response.json().data as Hero).catch(this.handleError);
+                response => response.json() as Hero).catch(this.handleError);
         
     }
 
@@ -38,7 +41,7 @@ export class HeroService
 
     create(name: string): Promise<Hero>{
         return this.http.post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
-        .toPromise().then(response => response.json().data).catch(this.handleError);
+        .toPromise().then(response => response.json()).catch(this.handleError);
     }
 
     delete(id: Number): Promise<void> {
