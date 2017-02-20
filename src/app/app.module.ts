@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MaterialModule } from '@angular/material';
 
 import { HeroesComponent } from './heroes.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
@@ -11,7 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HeroFormComponent } from './hero-form/hero-form.component';
-import { ImageUploadModule } from 'angular2-image-upload';
+import { HeroMenuComponent } from './hero-menu/hero-menu.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +20,15 @@ import { ImageUploadModule } from 'angular2-image-upload';
     HeroesComponent,
     HeroDetailComponent,
     DashboardComponent,
-    HeroFormComponent
+    HeroFormComponent,
+    HeroMenuComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    ImageUploadModule
+    MaterialModule
   ],
   providers: [ HeroService ],
   bootstrap: [ AppComponent ]
