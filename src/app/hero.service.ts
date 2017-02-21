@@ -39,8 +39,8 @@ export class HeroService
         .toPromise().then(() => hero).catch(this.handleError);
     }
 
-    create(id: Number, name: string): Promise<Hero>{
-        return this.http.post(this.heroesUrl, JSON.stringify({id: id, name: name}))
+    create(name: string): Promise<Hero>{
+        return this.http.post(this.heroesUrl, JSON.stringify({name: name}))
         .toPromise().then(response => response.json() as Hero).catch(this.handleError);
     }
 
