@@ -11,8 +11,8 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class HeroService
 {
-    private heroesUrl = 'http://localhost:4567/hello'; //URL to web api
-    private headers = new Headers([{'Content-Type': 'application/json'}, {'Accept':'application/json'}]);
+    private heroesUrl = 'http://localhost:4567/api/heroes'; //URL to web api
+    private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http){}
 
@@ -39,9 +39,9 @@ export class HeroService
         .toPromise().then(() => hero).catch(this.handleError);
     }
 
-    create(name: string): Promise<Hero>{
-        return this.http.post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
-        .toPromise().then(response => response.json()).catch(this.handleError);
+    create(id: Number, name: string): Promise<Hero>{
+        return this.http.post(this.heroesUrl, JSON.stringify({id: id, name: name}))
+        .toPromise().then(response => response.json() as Hero).catch(this.handleError);
     }
 
     delete(id: Number): Promise<void> {
