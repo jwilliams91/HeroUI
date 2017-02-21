@@ -20,6 +20,8 @@ export class HeroFormComponent implements OnInit {
 
   submitted = false;
   newHero: Hero;
+  heroImage: File;
+
   ngOnInit() {
     this.newHero = new Hero();
   }
