@@ -11,8 +11,10 @@ import { HeroService} from './hero.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { HeroFormComponent } from './hero-form/hero-form.component';
 import { HeroMenuComponent } from './hero-menu/hero-menu.component';
+
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { HeroMenuComponent } from './hero-menu/hero-menu.component';
     HeroesComponent,
     HeroDetailComponent,
     DashboardComponent,
+    HeroSearchComponent,
     HeroFormComponent,
     HeroMenuComponent
   ],
