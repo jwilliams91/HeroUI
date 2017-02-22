@@ -4,7 +4,7 @@
     <ul class="heroes">
       <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
         <span class="badge">{{hero.id}}</span> <span>{{hero.name}}</span>
-        <button class="delete" (click)="delete(hero); $event.stopPropagation()">X</button>
+        <!--<button class="delete" (click)="delete(hero); $event.stopPropagation()">X</button>-->
       </li>
     </ul>
     <button routerLink="/heroform" routerLinkActive="active">Add Hero</button>

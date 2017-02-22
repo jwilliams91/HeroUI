@@ -19,7 +19,7 @@ export class HeroService
     getHeroes(): Promise<Hero[]> {
         return this.http.get(this.heroesUrl).toPromise().then(
             response => response.json() as Hero[]);
-    } //stub
+    } 
 
     getHero(id: number): Promise<Hero> {
         const url = `${this.heroesUrl}/${id}`;
