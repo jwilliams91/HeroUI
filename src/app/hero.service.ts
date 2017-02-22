@@ -39,8 +39,8 @@ export class HeroService
         .toPromise().then(() => hero).catch(this.handleError);
     }
 
-    create(name: string): Promise<Hero>{
-        return this.http.post(this.heroesUrl, JSON.stringify({name: name}))
+    create(name: string, secretIdentity: string, bio: string): Promise<Hero>{
+        return this.http.post(this.heroesUrl, JSON.stringify({name: name, secretIdentity: secretIdentity, bio: bio}))
         .toPromise().then(response => response.json() as Hero).catch(this.handleError);
     }
 
@@ -50,9 +50,9 @@ export class HeroService
         .toPromise().then(() => null).catch(this.handleError);
     }
 
-    addHero(newHero: Hero): void{
-        this.getHeroes().then(heroes => newHero.id = (heroes.length + 1));
-        this.getHeroes().then(heroes => heroes.push(newHero));
-        console.log("Hero Added");
+    uploadHeroImage(image: FormData)
+    {
+        const url = `${this.heroesUrl}/upload`;
+        this.http.post(url, image).toPromise().then(() => null).catch(this.handleError);
     }
 }
