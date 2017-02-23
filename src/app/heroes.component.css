@@ -42,15 +42,14 @@
     left: -1px;
     top: -4px;
     height: 1.8em;
-    margin-right: .8em;
     border-radius: 4px 0 0 4px;
   }
 
   button.delete {
   float:right;
-  margin-top: 2px;
-  margin-right: .8em;
+  margin-top: -3px;
   background-color: gray !important;
+  padding: 0px 10px !important;
   color:white;
 }
 
