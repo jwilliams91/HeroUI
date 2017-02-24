@@ -33,10 +33,10 @@ export class HeroService
         return Promise.reject(error.message || error);
     }
 
-    update(hero: Hero): Promise<Hero>{
+    update(hero: Hero): Promise<void>{
         const url = `${this.heroesUrl}/${hero.id}`;
         return this.http.put(url, JSON.stringify(hero), {headers: this.headers})
-        .toPromise().then(() => hero).catch(this.handleError);
+        .toPromise().then(() => null).catch(this.handleError);
     }
 
     create(name: string, secretIdentity: string, bio: string): Promise<Hero>{
