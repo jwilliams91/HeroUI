@@ -7,3 +7,5 @@ export class Hero{
   bio: string;
   sidekicks: Sidekick[]; 
 }
+
+export const states = ['CA', 'MD', 'OH', 'VA'];

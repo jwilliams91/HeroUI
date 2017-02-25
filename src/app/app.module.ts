@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { HeroFormComponent } from './forms/hero-form/hero-form.component';
 import { HeroMenuComponent } from './hero-menu/hero-menu.component';
+import { HeroWithSidekickFormComponent } from './forms/hero-with-sidekick-form/hero-with-sidekick-form.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { HeroMenuComponent } from './hero-menu/hero-menu.component';
     DashboardComponent,
     HeroSearchComponent,
     HeroFormComponent,
-    HeroMenuComponent
+    HeroMenuComponent,
+    HeroWithSidekickFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,42 @@
+<h2>Hero Detail</h2>
+<h3><i>FormControl in a FormGroup</i></h3>
+<form [formGroup]="heroForm" novalidate>
+  <div class="form-group">
+    <label class="center-block">Name:
+      <input class="form-control" formControlName="name">
+      <button (click)="addSidekick()" type="button">Add a Sidekick</button>
+    </label>
+  </div>
+  <div formGroupName="sidekickArray" class="well well-lg">
+    <div *ngFor="let sidekick of sidekickArray.controls; let i=index" [formGroupName]="i" >
+        <h4>Sidekick #{{i + 1}}</h4>
+  <h4>Sidekick</h4>
+  <div class="form-group">
+    <label class="center-block">Name:
+      <input class="form-control" formControlName="name">
+    </label>
+  </div>
+  <div class="form-group">
+    <label class="center-block">Identity:
+      <input class="form-control" formControlName="identity">
+    </label>
+  </div>
+  <div class="form-group">
+    <label class="center-block">Bio:
+      <input class="form-control" formControlName="bio">
+    </label>
+  </div>
+  <div class="form-group">
+    <label class="center-block">Age:
+      <input class="form-control" formControlName="age">
+    </label>
+    </div>
+    </div>
+</div>
+
+</form>
+<p>Form value: {{ heroForm.value | json }}</p>
+<p>Form status: {{ heroForm.status | json }}</p>
+<p>Name value: {{ heroForm.get('sidekickArray.name').value }}</p>
+<p>Sidekick name value: {{ heroForm.get('sidekicks.name').value}}</p>
+
