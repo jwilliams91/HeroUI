@@ -1,6 +1,6 @@
 <h2>Marvel Heroes</h2>
 <div id="wrapper">
-  <div style="width: 33%; float: left;">
+  <div class="col-md-3">
     <ul class="heroes">
       <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
         <span class="badge">{{hero.id}}</span> <span>{{hero.name}}</span>
@@ -9,7 +9,7 @@
     </ul>
     <button routerLink="/heroform" routerLinkActive="active">Add Hero</button>
   </div>
-  <div style="width: 66%; float: right;">
+  <div class="col-md-6">
     <my-hero-detail [hero]="selectedHero"></my-hero-detail>
   </div>
 </div>
