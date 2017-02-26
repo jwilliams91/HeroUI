@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
 
 import { HeroesComponent } from './heroes.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
@@ -13,7 +12,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { HeroFormComponent } from './forms/hero-form/hero-form.component';
-import { HeroMenuComponent } from './hero-menu/hero-menu.component';
 
 
 @NgModule({
@@ -24,15 +22,13 @@ import { HeroMenuComponent } from './hero-menu/hero-menu.component';
     DashboardComponent,
     HeroSearchComponent,
     HeroFormComponent,
-    HeroMenuComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule,
-    MaterialModule
+    AppRoutingModule
   ],
   providers: [ HeroService ],
   bootstrap: [ AppComponent ]
