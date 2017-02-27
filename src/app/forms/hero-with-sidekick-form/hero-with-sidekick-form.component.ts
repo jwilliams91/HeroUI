@@ -78,9 +78,6 @@ export class HeroWithSidekickFormComponent implements OnInit {
 
   prepareSaveHero(): Hero {
     const formModel = this.heroForm.value;
-    
-    
-
     var saveHero: Hero = {
       id: null,
       name: formModel.hName as string,

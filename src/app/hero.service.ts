@@ -31,11 +31,7 @@ export class HeroService
     }
 
     create(hero: Hero, sidekicks: Sidekick[]): Promise<void> {
-        return this.http.post(this.heroesUrl, JSON.stringify(hero)).toPromise().then(() => this.createSidekick(sidekicks)).catch(this.handleError);
-    }
-
-    createSidekick(sidekicks: Sidekick[]): Promise<void> {
-        return this.http.post(this.sidekickUrl, JSON.stringify(sidekicks)).toPromise().then(() => null).catch(this.handleError);
+        return this.http.post(this.heroesUrl, (JSON.stringify(hero) + '//' + JSON.stringify(sidekicks))).toPromise().then(() => null).catch(this.handleError);
     }
 
     update(hero: Hero): Promise<void>{
