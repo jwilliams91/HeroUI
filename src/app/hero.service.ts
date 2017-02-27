@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {Hero} from './hero';
+import {Sidekick} from './sidekick';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
@@ -12,6 +13,7 @@ import 'rxjs/add/operator/do';
 export class HeroService
 {
     private heroesUrl = 'http://localhost:4567/api/heroes'; //URL to web api
+    private sidekickUrl = 'http://localhost:4567/api/sidekick';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http){}
@@ -54,5 +56,13 @@ export class HeroService
     {
         const url = `${this.heroesUrl}/upload`;
         this.http.post(url, image).toPromise().then(() => null).catch(this.handleError);
+    }
+
+    test(hero: Hero): Promise<void> {
+        return this.http.post(this.heroesUrl, JSON.stringify(hero)).toPromise().then(() => null).catch(this.handleError);
+    }
+
+    testSidekick(sidekicks: Sidekick[]): Promise<void> {
+        return this.http.post(this.sidekickUrl, JSON.stringify(sidekicks)).toPromise().then(() => null).catch(this.handleError);
     }
 }

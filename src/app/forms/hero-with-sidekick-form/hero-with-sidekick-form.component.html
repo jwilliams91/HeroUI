@@ -1,42 +1,52 @@
 <h2>Hero Detail</h2>
-<h3><i>FormControl in a FormGroup</i></h3>
-<form [formGroup]="heroForm" novalidate>
+<h3><i>A FormGroup with multiple FormControls</i></h3>
+<form [formGroup]="heroForm" (ngSubmit)="onSubmit()" novalidate>
   <div class="form-group">
     <label class="center-block">Name:
-      <input class="form-control" formControlName="name">
-      <button (click)="addSidekick()" type="button">Add a Sidekick</button>
-    </label>
-  </div>
-  <div formGroupName="sidekickArray" class="well well-lg">
-    <div *ngFor="let sidekick of sidekickArray.controls; let i=index" [formGroupName]="i" >
-        <h4>Sidekick #{{i + 1}}</h4>
-  <h4>Sidekick</h4>
-  <div class="form-group">
-    <label class="center-block">Name:
-      <input class="form-control" formControlName="name">
+      <input class="form-control" formControlName="hName">
     </label>
   </div>
   <div class="form-group">
     <label class="center-block">Identity:
-      <input class="form-control" formControlName="identity">
+      <input class="form-control" formControlName="hId">
     </label>
   </div>
   <div class="form-group">
     <label class="center-block">Bio:
-      <input class="form-control" formControlName="bio">
+      <input class="form-control" formControlName="hBio">
     </label>
   </div>
-  <div class="form-group">
-    <label class="center-block">Age:
-      <input class="form-control" formControlName="age">
+  <div formGroupName="sidekick" class="well well-lg">
+    <h4>Sidekick Info</h4>
+    <div class="form-group">
+      <label class="center-block">Name:
+      <input class="form-control" formControlName="name">
     </label>
     </div>
+    <div class="form-group">
+      <label class="center-block">Identity:
+        <input class="form-control" formControlName="secretIdentity">
+      </label>
     </div>
-</div>
-
+    <div class="form-group">
+      <label class="center-block">Bio:
+        <input class="form-control" formControlName="bio">
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="center-block">Age:
+        <input class="form-control" formControlName="age">
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="center-block">Hero:
+        <input class="form-control" formControlName="hero" value="{{heroForm.get('hName').value}}" disabled>
+      </label>
+    </div>
+  </div>
+  <button type="submit" [disabled]="heroForm.pristine" class="btn btn-success">Submit</button>
 </form>
 <p>Form value: {{ heroForm.value | json }}</p>
 <p>Form status: {{ heroForm.status | json }}</p>
-<p>Name value: {{ heroForm.get('sidekickArray.name').value }}</p>
-<p>Sidekick name value: {{ heroForm.get('sidekicks.name').value}}</p>
-
+<p>Sub Status: {{savedHero | json}}</p>
+<p>{{heroForm.get('sidekick.hero').value}}</p>
