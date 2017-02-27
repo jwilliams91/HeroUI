@@ -36,8 +36,8 @@ export class HeroWithSidekickFormComponent implements OnInit {
     console.log('On onSubmit');
     this.newHero = this.prepareSaveHero();
     this.newSidekicks = this.prepareSaveSidekicks();
-    this.heroService.test(this.newHero);
-    this.heroService.testSidekick(this.newSidekicks);
+    this.heroService.create(this.newHero, this.newSidekicks);
+    this.router.navigateByUrl("/heroes");
   }
 
 

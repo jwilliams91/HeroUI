@@ -31,7 +31,7 @@ export class HeroFormComponent implements OnInit {
 
   onSubmit(newHero: Hero): void{ 
     this.submitted = true; 
-    this.heroService.create(newHero.name, newHero.secretIdentity, newHero.bio);
+    //this.heroService.create(newHero.name, newHero.secretIdentity, newHero.bio);
     this.heroService.uploadHeroImage(this.getFileRef());
     this.router.navigateByUrl("/heroes");
   }

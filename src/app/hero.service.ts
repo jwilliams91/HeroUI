@@ -30,20 +30,18 @@ export class HeroService
         
     }
 
-    private handleError(error: any): Promise<any> {
-        console.error('An error occured', error);
-        return Promise.reject(error.message || error);
+    create(hero: Hero, sidekicks: Sidekick[]): Promise<void> {
+        return this.http.post(this.heroesUrl, JSON.stringify(hero)).toPromise().then(() => this.createSidekick(sidekicks)).catch(this.handleError);
+    }
+
+    createSidekick(sidekicks: Sidekick[]): Promise<void> {
+        return this.http.post(this.sidekickUrl, JSON.stringify(sidekicks)).toPromise().then(() => null).catch(this.handleError);
     }
 
     update(hero: Hero): Promise<void>{
         const url = `${this.heroesUrl}/${hero.id}`;
         return this.http.put(url, JSON.stringify(hero), {headers: this.headers})
         .toPromise().then(() => null).catch(this.handleError);
-    }
-
-    create(name: string, secretIdentity: string, bio: string): Promise<Hero>{
-        return this.http.post(this.heroesUrl, JSON.stringify({name: name, secretIdentity: secretIdentity, bio: bio}))
-        .toPromise().then(response => response.json() as Hero).catch(this.handleError);
     }
 
     delete(id: Number): Promise<void> {
@@ -58,11 +56,8 @@ export class HeroService
         this.http.post(url, image).toPromise().then(() => null).catch(this.handleError);
     }
 
-    test(hero: Hero): Promise<void> {
-        return this.http.post(this.heroesUrl, JSON.stringify(hero)).toPromise().then(() => null).catch(this.handleError);
-    }
-
-    testSidekick(sidekicks: Sidekick[]): Promise<void> {
-        return this.http.post(this.sidekickUrl, JSON.stringify(sidekicks)).toPromise().then(() => null).catch(this.handleError);
+    private handleError(error: any): Promise<any> {
+        console.error('An error occured', error);
+        return Promise.reject(error.message || error);
     }
 }
