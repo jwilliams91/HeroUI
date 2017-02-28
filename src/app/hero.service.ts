@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {Hero} from './hero';
+import {Sidekick} from './sidekick';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
@@ -12,6 +13,7 @@ import 'rxjs/add/operator/do';
 export class HeroService
 {
     private heroesUrl = 'http://localhost:4567/api/heroes'; //URL to web api
+    private sidekickUrl = 'http://localhost:4567/api/sidekick';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http){}
@@ -28,20 +30,14 @@ export class HeroService
         
     }
 
-    private handleError(error: any): Promise<any> {
-        console.error('An error occured', error);
-        return Promise.reject(error.message || error);
+    create(hero: Hero, sidekicks: Sidekick[]): Promise<void> {
+        return this.http.post(this.heroesUrl, (JSON.stringify(hero) + '//' + JSON.stringify(sidekicks))).toPromise().then(() => null).catch(this.handleError);
     }
 
     update(hero: Hero): Promise<void>{
         const url = `${this.heroesUrl}/${hero.id}`;
         return this.http.put(url, JSON.stringify(hero), {headers: this.headers})
         .toPromise().then(() => null).catch(this.handleError);
-    }
-
-    create(name: string, secretIdentity: string, bio: string): Promise<Hero>{
-        return this.http.post(this.heroesUrl, JSON.stringify({name: name, secretIdentity: secretIdentity, bio: bio}))
-        .toPromise().then(response => response.json() as Hero).catch(this.handleError);
     }
 
     delete(id: Number): Promise<void> {
@@ -54,5 +50,10 @@ export class HeroService
     {
         const url = `${this.heroesUrl}/upload`;
         this.http.post(url, image).toPromise().then(() => null).catch(this.handleError);
+    }
+
+    private handleError(error: any): Promise<any> {
+        console.error('An error occured', error);
+        return Promise.reject(error.message || error);
     }
 }

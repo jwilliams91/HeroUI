@@ -5,6 +5,5 @@ export class Sidekick{
   name: string;
   secretIdentity: string;
   bio: string;
-  hero: Hero;
   age: number;
 }

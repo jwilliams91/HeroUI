@@ -5,5 +5,5 @@ export class Hero{
   name: string;
   secretIdentity: string;
   bio: string;
-  sidekicks: Sidekick[]; 
+  sidekicks: Sidekick[];
 }
