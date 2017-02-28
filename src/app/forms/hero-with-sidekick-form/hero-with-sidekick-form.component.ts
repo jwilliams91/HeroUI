@@ -13,7 +13,7 @@ import { Sidekick } from '../../sidekick';
   templateUrl: './hero-with-sidekick-form.component.html',
   styleUrls: ['./hero-with-sidekick-form.component.css']
 })
-export class HeroWithSidekickFormComponent implements OnInit {
+export class HeroWithSidekickFormComponent {
   @ViewChild('fileInput') inputEl: ElementRef;
 
   constructor(
@@ -21,16 +21,12 @@ export class HeroWithSidekickFormComponent implements OnInit {
     private location: Location,
     private router: Router,
     private fb:FormBuilder
-  ) { this.createForm();}
+  ) { this.createForm(); this.newHero = new Hero();}
 
   heroForm: FormGroup;
   newHero: Hero;
   newSidekicks: Sidekick[];
 
-  ngOnInit() {
-    this.newHero = new Hero();
-
-  }
 
   onSubmit(newHero: Hero): void {
     console.log('On onSubmit');
@@ -40,24 +36,21 @@ export class HeroWithSidekickFormComponent implements OnInit {
     this.router.navigateByUrl("/heroes");
   }
 
-
   createForm(): void {
     this.heroForm = this.fb.group({
       hName: ['', Validators.required],
       hId: ['', Validators.required],
       hBio: ['', Validators.required],
-      sidekick: this.fb.group({
-        name: ['', Validators.required],
-        secretIdentity: ['', Validators.required],
-        bio: ['', Validators.required],
-        hero:'',
-        age: ['', Validators.required]
-      })
     });
   }
 
   addSidekick(): void {
-    this.newSidekicks.push(new Sidekick());
+    this.heroForm.addControl('listSidekicks', this.fb.array([]));
+    this.listSidekicks.push(this.fb.group(this.initSidekick()));
+  }
+
+  get listSidekicks(): FormArray {
+    return this.heroForm.get('listSidekicks') as FormArray;
   }
 
   getFileRef(): FormData {
@@ -90,15 +83,29 @@ export class HeroWithSidekickFormComponent implements OnInit {
 
   prepareSaveSidekicks(): Sidekick[] {
     const formModel = this.heroForm.value;
-    var sArray = new Array<Sidekick>();
-    var saveSidekick: Sidekick = {
-      id: null,
-      name: formModel.sidekick.name as string,
-      secretIdentity: formModel.sidekick.secretIdentity as string,
-      bio: formModel.sidekick.bio as string,
-      age: formModel.sidekick.age as number
-    };
-    sArray.push(saveSidekick);
-    return sArray;
+
+    if(this.heroForm.contains('listSidekicks')){
+      var sidekickDeepCopy: Sidekick[] = formModel.listSidekicks.map((sidekick: Sidekick) => Object.assign({}, sidekick));
+     return sidekickDeepCopy; 
+    }
+    else
+      return null;
+  }
+
+  initSidekick():Sidekick {
+    var s = new Sidekick();
+    s.name = '';
+    s.bio = '';
+    s.secretIdentity ='';
+    s.age =  null;
+    return s;
+  }
+
+  deleteSidekick(index: number): void {
+    this.listSidekicks.removeAt(index);
+    if(this.listSidekicks.length === 0)
+    {
+      this.heroForm.removeControl('listSidekicks');
+    }
   }
 }
