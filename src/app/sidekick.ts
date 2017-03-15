@@ -1,4 +1,5 @@
 import {Hero} from './hero';
+import {Weapon} from '../weapon';
 
 export class Sidekick{
   id: number;
@@ -6,4 +7,5 @@ export class Sidekick{
   secretIdentity: string;
   bio: string;
   age: number;
+  weapons: Weapon[];
 }

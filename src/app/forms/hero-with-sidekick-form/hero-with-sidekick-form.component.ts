@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { Hero } from '../../hero';
+import { Weapon } from '../../../weapon';
 import { HeroService } from '../../hero.service';
 import { Sidekick } from '../../sidekick';
 
@@ -33,6 +34,7 @@ export class HeroWithSidekickFormComponent {
     this.newHero = this.prepareSaveHero();
     this.newSidekicks = this.prepareSaveSidekicks();
     this.heroService.create(this.newHero, this.newSidekicks);
+    this.heroService.uploadHeroImage(this.getFileRef());
     this.router.navigateByUrl("/heroes");
   }
 
@@ -41,12 +43,15 @@ export class HeroWithSidekickFormComponent {
       hName: ['', Validators.required],
       hId: ['', Validators.required],
       hBio: ['', Validators.required],
+      heroImage: ['']
     });
   }
 
   addSidekick(): void {
     this.heroForm.addControl('listSidekicks', this.fb.array([]));
     this.listSidekicks.push(this.fb.group(this.initSidekick()));
+    let list = this.listSidekicks.get((this.listSidekicks.controls.length - 1).toString()) as FormGroup;
+    list.addControl('weapons', this.fb.array([]));
   }
 
   get listSidekicks(): FormArray {
@@ -108,4 +113,5 @@ export class HeroWithSidekickFormComponent {
       this.heroForm.removeControl('listSidekicks');
     }
   }
+
 }

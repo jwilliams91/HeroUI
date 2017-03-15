@@ -2,8 +2,8 @@
 <div id="wrapper">
   <div class="col-md-3">
     <ul class="heroes">
-      <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
-        <span class="badge">{{hero.id}}</span> <span>{{hero.name}}</span>
+      <li *ngFor="let hero of heroes; let i=index;" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
+        <span class="badge">{{i + 1}}</span> <span>{{hero.name}}</span>
         <button class="delete" (click)="delete(hero); $event.stopPropagation()">X</button>
       </li>
     </ul>
@@ -14,4 +14,13 @@
   </div>
 </div>
 
+<div *ngIf="selectedHero" class="col-md-3">
+  <h3>Sidekicks</h3>
+<ul class="heroes">
+      <li *ngFor="let s of heroes.sidekicks; let k=index">
+        <span class="badge">{{k + 1}}</span> <span>{{s.name}}</span>
+        <button class="delete" (click)="delete(hero); $event.stopPropagation()">X</button>
+      </li>
+</ul>
+</div>
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Hero } from './hero';
+import { Sidekick } from './sidekick';
 import { HeroService } from './hero.service';
 
 
@@ -21,6 +22,7 @@ export class HeroesComponent implements OnInit{
 
   onSelect(hero: Hero): void{
     this.selectedHero = hero;
+    this.getSidekicks();
   }
 
   getHeroes(): void {
@@ -37,8 +39,12 @@ export class HeroesComponent implements OnInit{
     });
   }
 
+  getSidekicks(): void {
+    this.heroService.getSidekicks(this.selectedHero.id).then(sidekicks => this.selectedHero.sidekicks = sidekicks);
+  }
+
   ngOnInit(): void{
-    this.getHeroes()
+    this.getHeroes();
   }
 
 }

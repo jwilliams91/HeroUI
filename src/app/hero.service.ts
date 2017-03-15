@@ -21,6 +21,11 @@ export class HeroService
     getHeroes(): Promise<Hero[]> {
         return this.http.get(this.heroesUrl).toPromise().then(
             response => response.json() as Hero[]);
+    }
+
+    getSidekicks(id: number): Promise<Sidekick[]> {
+        const url = `${this.heroesUrl}/sidekicks/?id=${id}`;
+        return this.http.get(url).toPromise().then(response => response.json() as Sidekick[]);
     } 
 
     getHero(id: number): Promise<Hero> {

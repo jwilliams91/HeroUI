@@ -1,8 +1,9 @@
 <h2>Hero Detail</h2>
-<form [formGroup]="heroForm" (ngSubmit)="onSubmit()" novalidate >
+<form [formGroup]="heroForm" (ngSubmit)="onSubmit()" novalidate>
   <div class="form-group">
     <label class="center-block">Name:
       <input class="form-control" formControlName="hName" required>
+      <div *ngIf="(!heroForm.controls.hName.valid && heroForm.controls.hName.touched)" class="error-text">Works!</div>
     </label>
   </div>
   <div class="form-group">
@@ -15,38 +16,44 @@
       <input class="form-control" formControlName="hBio" required> 
     </label>
   </div>
+  <div class="form-group">
+    <label class="center-block">Upload Image</label>
+    <input type="file" class="form-control" formControlName="heroImage" #fileInput accept="image/*" />
+  </div>
 
   <div *ngIf="heroForm.contains('listSidekicks')">
-  <div formGroupName="listSidekicks" class="well well-lg">
-    <div *ngFor="let s of listSidekicks.controls; let i=index" [formGroupName]="i" style="border-left: 0px;">
-      <div style="display: inline-flex;">
-        <h4>Sidekick #{{i + 1}}</h4> <button class="delete" (click)="deleteSidekick(i); $event.stopPropagation()">X</button>
-      </div>
-    <div class="form-group">
-      <label class="center-block">Name:
+    <div formGroupName="listSidekicks" class="well well-lg">
+      <div *ngFor="let s of listSidekicks.controls; let i=index" [formGroupName]="i" style="border-left: 0px;">
+        <div style="display: inline-flex;">
+          <h4>Sidekick #{{i + 1}}</h4> <button class="delete" (click)="deleteSidekick(i); $event.stopPropagation()">X</button>
+        </div>
+        <div class="form-group">
+          <label class="center-block">Name:
       <input class="form-control" formControlName="name" required>
     </label>
-    </div>
-    <div class="form-group">
-      <label class="center-block">Identity:
+        </div>
+        <div class="form-group">
+          <label class="center-block">Identity:
         <input class="form-control" formControlName="secretIdentity" required>
       </label>
-    </div>
-    <div class="form-group">
-      <label class="center-block">Bio:
+        </div>
+        <div class="form-group">
+          <label class="center-block">Bio:
         <input class="form-control" formControlName="bio" required>
       </label>
-    </div>
-    <div class="form-group">
-      <label class="center-block">Age:
+        </div>
+        <div class="form-group">
+          <label class="center-block">Age:
         <input class="form-control" formControlName="age" required>
       </label>
+        </div>
+        <div class="form-group">
+          <app-weapons [listSidekicks]="listSidekicks" [index]="i"></app-weapons>
+        </div>
+      </div>
     </div>
-    </div>
-  </div>
   </div>
   <button type="submit" [disabled]="!heroForm.valid" class="btn btn-success">Submit</button>
   <button type="button" class="btn" (click)="addSidekick()">Add Sidekick</button>
 </form>
-<p>Form value: {{ heroForm.value | json }}</p>
-<p>Form status: {{ heroForm.status | json }}</p>
+<p> {{heroForm.value| json}}</p>

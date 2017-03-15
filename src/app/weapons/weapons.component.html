@@ -1,0 +1,20 @@
+<div [formGroup]="sidekick">
+  <div formArrayName="weapons" class="well well-lg">
+    <div *ngFor="let s of weapons.controls; let i=index" [formGroupName]="i" style="border-left: 0px;">
+      <div style="display: inline-flex;">
+        <h4>Weapon #{{i + 1}}</h4> <button class="delete" (click)="deleteWeapon(i); $event.stopPropagation()">X</button>
+        <div class="formGroup">
+          <label class="center-block">Name:
+        <input class="form-control" formControlName="name" required>
+        </label>
+        </div>
+        <div class="formGroup">
+          <label class="center-block">Power Level:
+        <input class="form-control" formControlName="powerLevel" required>
+        </label>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn" (click)="addWeapon()">Add Weapon</button>
+  </div>
+</div>
